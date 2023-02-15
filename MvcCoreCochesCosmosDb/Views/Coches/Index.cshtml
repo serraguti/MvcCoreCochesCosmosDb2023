@@ -1,0 +1,23 @@
+﻿<h1 style="color:blue">
+    Azure Cosmos Db
+</h1>
+
+<a asp-controller="Coches"
+    asp-action="Vehiculos">
+    Vehículos Cosmos Db
+</a>
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+<hr/>
+<form method="post">
+    <button name="accion" value="iniciar" class="btn btn-danger">
+        Generar recursos Cosmos Db
+    </button>
+</form>
+
+<h2 style="color:red">
+    @ViewData["MENSAJE"]
+</h2>

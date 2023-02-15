@@ -1,0 +1,42 @@
+﻿@model MvcCoreCochesCosmosDb.Models.Vehiculo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Vehiculo</h4>
+    <hr />
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="@Model.Imagen" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">@Model.Marca @Model.Modelo</h5>
+        <p class="card-text">
+            Velocidad máxima: @Model.VelocidadMaxima    
+        </p>
+      </div>
+    </div>
+    @if (Model.Motor != null)
+    {
+        <ul class="list-group">
+            <li class="list-group-item">
+                Tipo de motor: @Model.Motor.Tipo
+            </li>
+            <li class="list-group-item">
+                Caballos: @Model.Motor.Caballos
+            </li>
+            <li class="list-group-item">
+                Cilindrada: @Model.Motor.Cilindrada
+            </li>
+            <li class="list-group-item">
+                Turbo: @Model.Motor.Turbo
+            </li>
+        </ul>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
