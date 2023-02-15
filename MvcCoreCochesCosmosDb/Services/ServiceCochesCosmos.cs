@@ -88,5 +88,26 @@ namespace MvcCoreCochesCosmosDb.Services
                 (id, new PartitionKey(id));
             return response.Resource;
         }
+
+        //BUSCAR MEDIANTE UN CONSULTA SQL EN JSON COSMOS DB
+        public async Task<List<Vehiculo>> GetVehiculosMarcaAsync(string marca)
+        {
+            //LAS CONSULTAS A JSON NO TIENEN PARAMETROS, DEBEN 
+            //REALIZARSE CONCATENANDO
+            string sql = "select * from c where c.Marca='" + marca + "'";
+            //PARA FILTRAR SE UTILIZAN QUERY DEFINITIONS
+            QueryDefinition definition = new QueryDefinition(sql);
+            //A PARTIR DE LA DEFINICION SE RECUPERAN LOS ELEMENTOS 
+            //CON UN Iterator PERO ENVIANDO LA DEFINICION
+            var query =
+                this.containerCosmos.GetItemQueryIterator<Vehiculo>(definition);
+            List<Vehiculo> coches = new List<Vehiculo>();
+            while (query.HasMoreResults)
+            {
+                var results = await query.ReadNextAsync();
+                coches.AddRange(results);
+            }
+            return coches;
+        }
     }
 }

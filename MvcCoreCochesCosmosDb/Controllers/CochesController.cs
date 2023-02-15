@@ -77,5 +77,17 @@ namespace MvcCoreCochesCosmosDb.Controllers
             await this.service.UpdateVehiculoAsync(car);
             return RedirectToAction("Vehiculos");
         }
+
+        public IActionResult BuscadorCoches()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task <IActionResult> BuscadorCoches(string marca)
+        {
+            List<Vehiculo> coches = await this.service.GetVehiculosMarcaAsync(marca);
+            return View(coches);
+        }
     }
 }
